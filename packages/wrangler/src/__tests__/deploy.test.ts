@@ -9233,7 +9233,7 @@ addEventListener('fetch', event => {});`
 					Worker Startup Time: 100 ms
 					Your Worker has access to the following bindings:
 					Binding                    Resource
-					env.FOO (foo-service)      Worker
+					env.FOO (foo-service)      Service
 
 					Uploaded test-name (TIMINGS)
 					Deployed test-name triggers (TIMINGS)
@@ -9275,7 +9275,7 @@ addEventListener('fetch', event => {});`
 					Worker Startup Time: 100 ms
 					Your Worker has access to the following bindings:
 					Binding                              Resource
-					env.FOO (foo-service#MyHandler)      Worker
+					env.FOO (foo-service#MyHandler)      Service
 
 					Uploaded test-name (TIMINGS)
 					Deployed test-name triggers (TIMINGS)
@@ -9315,7 +9315,84 @@ addEventListener('fetch', event => {});`
 					Worker Startup Time: 100 ms
 					Your Worker has access to the following bindings:
 					Binding                    Resource
-					env.FOO (foo-service)      Worker
+					env.FOO (foo-service)      Service
+
+					Uploaded test-name (TIMINGS)
+					Deployed test-name triggers (TIMINGS)
+					  https://test-name.test-sub-domain.workers.dev
+					Current Version ID: Galaxy-Class"
+				`);
+				expect(std.err).toMatchInlineSnapshot(`""`);
+				expect(std.warn).toMatchInlineSnapshot(`""`);
+			});
+
+			it("should support service bindings with service_id", async () => {
+				writeWranglerConfig({
+					services: [
+						{
+							binding: "FOO",
+							service_id: "123e4567-e89b-12d3-a456-426614174000",
+						},
+					],
+				});
+				writeWorkerSource();
+				mockSubDomainRequest();
+				mockUploadWorkerRequest({
+					expectedBindings: [
+						{
+							type: "service",
+							name: "FOO",
+							service_id: "123e4567-e89b-12d3-a456-426614174000",
+						},
+					],
+				});
+
+				await runWrangler("deploy index.js");
+				expect(std.out).toMatchInlineSnapshot(`
+					"Total Upload: xx KiB / gzip: xx KiB
+					Worker Startup Time: 100 ms
+					Your Worker has access to the following bindings:
+					Binding                                             Resource
+					env.FOO (123e4567-e89b-12d3-a456-426614174000)      Service
+
+					Uploaded test-name (TIMINGS)
+					Deployed test-name triggers (TIMINGS)
+					  https://test-name.test-sub-domain.workers.dev
+					Current Version ID: Galaxy-Class"
+				`);
+				expect(std.err).toMatchInlineSnapshot(`""`);
+				expect(std.warn).toMatchInlineSnapshot(`""`);
+			});
+
+			it("should support service bindings with service_id and experimental_remote", async () => {
+				writeWranglerConfig({
+					services: [
+						{
+							binding: "FOO",
+							service_id: "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+							experimental_remote: true,
+						},
+					],
+				});
+				writeWorkerSource();
+				mockSubDomainRequest();
+				mockUploadWorkerRequest({
+					expectedBindings: [
+						{
+							type: "service",
+							name: "FOO",
+							service_id: "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+						},
+					],
+				});
+
+				await runWrangler("deploy index.js");
+				expect(std.out).toMatchInlineSnapshot(`
+					"Total Upload: xx KiB / gzip: xx KiB
+					Worker Startup Time: 100 ms
+					Your Worker has access to the following bindings:
+					Binding                                             Resource
+					env.FOO (f47ac10b-58cc-4372-a567-0e02b2c3d479)      Service
 
 					Uploaded test-name (TIMINGS)
 					Deployed test-name triggers (TIMINGS)

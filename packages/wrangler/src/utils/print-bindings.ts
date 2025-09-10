@@ -365,40 +365,46 @@ export function printBindings(
 
 	if (services !== undefined && services.length > 0) {
 		output.push(
-			...services.map(
-				({ binding, service, entrypoint, experimental_remote }) => {
-					let value = service;
-					let mode = undefined;
+			...services.map((serviceBinding) => {
+				let value = serviceBinding.service || serviceBinding.service_id;
+				let mode = undefined;
 
-					if (entrypoint) {
-						value += `#${entrypoint}`;
-					}
-
-					if (experimental_remote) {
-						mode = getMode({ isSimulatedLocally: false });
-					} else if (context.local && context.registry !== null) {
-						const registryDefinition = context.registry?.[service];
-						hasConnectionStatus = true;
-
-						if (
-							registryDefinition &&
-							(!entrypoint ||
-								registryDefinition.entrypointAddresses?.[entrypoint])
-						) {
-							mode = getMode({ isSimulatedLocally: true, connected: true });
-						} else {
-							mode = getMode({ isSimulatedLocally: true, connected: false });
-						}
-					}
-
-					return {
-						name: binding,
-						type: friendlyBindingNames.services,
-						value,
-						mode,
-					};
+				if (serviceBinding.service && serviceBinding.entrypoint) {
+					value += `#${serviceBinding.entrypoint}`;
 				}
-			)
+
+				if (serviceBinding.experimental_remote) {
+					mode = getMode({ isSimulatedLocally: false });
+				} else if (
+					context.local &&
+					context.registry !== null &&
+					serviceBinding.service
+				) {
+					const registryDefinition = context.registry?.[serviceBinding.service];
+					hasConnectionStatus = true;
+
+					const entrypoint =
+						"entrypoint" in serviceBinding
+							? serviceBinding.entrypoint
+							: undefined;
+					if (
+						registryDefinition &&
+						(!entrypoint ||
+							registryDefinition.entrypointAddresses?.[entrypoint])
+					) {
+						mode = getMode({ isSimulatedLocally: true, connected: true });
+					} else {
+						mode = getMode({ isSimulatedLocally: true, connected: false });
+					}
+				}
+
+				return {
+					name: serviceBinding.binding,
+					type: friendlyBindingNames.services,
+					value,
+					mode,
+				};
+			})
 		);
 	}
 

@@ -456,27 +456,32 @@ export async function generateEnvTypes(
 
 	if (configToDTS.services) {
 		for (const service of configToDTS.services) {
+			const serviceName = service.service || service.service_id;
+			if (!serviceName) {
+				continue; // Skip invalid service bindings
+			}
+			const serviceEntrypoint =
+				"entrypoint" in service ? service.entrypoint : undefined;
 			const serviceEntry =
-				service.service !== entrypoint?.name
-					? serviceEntries?.get(service.service)
+				serviceName !== entrypoint?.name
+					? serviceEntries?.get(serviceName)
 					: entrypoint;
 
 			const importPath = serviceEntry
 				? generateImportSpecifier(fullOutputPath, serviceEntry.file)
 				: undefined;
-
 			const exportExists = serviceEntry?.exports?.some(
-				(e) => e === (service.entrypoint ?? "default")
+				(e) => e === (serviceEntrypoint ?? "default")
 			);
 
 			let typeName: string;
 
 			if (importPath && exportExists) {
-				typeName = `Service<typeof import("${importPath}").${service.entrypoint ?? "default"}>`;
-			} else if (service.entrypoint) {
-				typeName = `Service /* entrypoint ${service.entrypoint} from ${service.service} */`;
+				typeName = `Service<typeof import("${importPath}").${serviceEntrypoint ?? "default"}>`;
+			} else if (serviceEntrypoint) {
+				typeName = `Service /* entrypoint ${serviceEntrypoint} from ${serviceName} */`;
 			} else {
-				typeName = `Fetcher /* ${service.service} */`;
+				typeName = `Fetcher /* ${serviceName} */`;
 			}
 
 			envTypeStructure.push([constructTypeKey(service.binding), typeName]);
