@@ -424,8 +424,7 @@ export async function getDevMiniflareOptions(config: {
 									remoteProxyConnectionString:
 										remoteProxySessionData?.session
 											?.remoteProxyConnectionString,
-									remoteBindingsEnabled:
-										resolvedPluginConfig.experimental.remoteBindings ?? true,
+
 									containerBuildId,
 								}
 							);
@@ -750,8 +749,7 @@ export async function getPreviewMiniflareOptions(config: {
 					{
 						remoteProxyConnectionString:
 							remoteProxySessionData?.session?.remoteProxyConnectionString,
-						remoteBindingsEnabled:
-							resolvedPluginConfig.experimental.remoteBindings ?? true,
+
 						containerBuildId,
 					}
 				);
