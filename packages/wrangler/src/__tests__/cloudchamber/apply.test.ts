@@ -102,7 +102,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					instances: 3,
 					class_name: "DurableObjectClass",
-					image: "docker.io/something:hello",
+					image: "registry.cloudflare.com/something:hello",
 					constraints: {
 						tier: 2,
 					},
@@ -129,7 +129,7 @@ describe("cloudchamber apply", () => {
 			│     tier = 2
 			│
 			│     [containers.configuration]
-			│     image = \\"docker.io/something:hello\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/something:hello\\"
 			│     instance_type = \\"dev\\"
 			│
 			│
@@ -150,7 +150,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 4,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					constraints: {
 						tier: 2,
 					},
@@ -167,7 +167,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.DEFAULT,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -225,13 +225,13 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					max_instances: 3,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 				{
 					name: "my-container-app-2",
 					max_instances: 3,
 					class_name: "DurableObjectClass2",
-					image: "docker.io/other-app:boop",
+					image: "registry.cloudflare.com/other-app:boop",
 				},
 			],
 		});
@@ -246,7 +246,7 @@ describe("cloudchamber apply", () => {
 				version: 1,
 				scheduling_policy: SchedulingPolicy.DEFAULT,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -287,7 +287,7 @@ describe("cloudchamber apply", () => {
 			│   scheduling_policy = \\"default\\"
 			│
 			│     [containers.configuration]
-			│     image = \\"docker.io/other-app:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/other-app:boop\\"
 			│     instance_type = \\"dev\\"
 			│
 			│     [containers.constraints]
@@ -314,14 +314,14 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					instances: 4,
 					class_name: "DurableObjectClass",
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					rollout_kind: "none",
 				},
 				{
 					name: "my-container-app-2",
 					instances: 1,
 					class_name: "DurableObjectClass2",
-					image: "docker.io/other-app:boop",
+					image: "registry.cloudflare.com/other-app:boop",
 				},
 			],
 		});
@@ -335,7 +335,7 @@ describe("cloudchamber apply", () => {
 				version: 1,
 				scheduling_policy: SchedulingPolicy.DEFAULT,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -375,7 +375,7 @@ describe("cloudchamber apply", () => {
 			│   scheduling_policy = \\"default\\"
 			│
 			│     [containers.configuration]
-			│     image = \\"docker.io/other-app:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/other-app:boop\\"
 			│     instance_type = \\"dev\\"
 			│
 			│     [containers.constraints]
@@ -400,13 +400,13 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					instances: 4,
 					class_name: "DurableObjectClass",
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 				{
 					name: "my-container-app-2",
 					instances: 1,
 					class_name: "DurableObjectClass2",
-					image: "docker.io/other-app:boop",
+					image: "registry.cloudflare.com/other-app:boop",
 				},
 			],
 		});
@@ -420,7 +420,7 @@ describe("cloudchamber apply", () => {
 				version: 1,
 				scheduling_policy: SchedulingPolicy.DEFAULT,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -459,7 +459,7 @@ describe("cloudchamber apply", () => {
 			│   scheduling_policy = \\"default\\"
 			│
 			│     [containers.configuration]
-			│     image = \\"docker.io/other-app:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/other-app:boop\\"
 			│     instance_type = \\"dev\\"
 			│
 			│     [containers.constraints]
@@ -486,7 +486,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					instances: 4,
 					class_name: "DurableObjectClass",
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					configuration: {
 						labels: [
 							{
@@ -528,7 +528,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.DEFAULT,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					labels: [
 						{
 							name: "name",
@@ -626,7 +626,7 @@ describe("cloudchamber apply", () => {
 					class_name: "DurableObjectClass",
 					name: "my-container-app",
 					instances: 3,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					configuration: {
 						labels: [
 							{
@@ -669,7 +669,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.DEFAULT,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					labels: [
 						{
 							name: "name",
@@ -732,7 +732,7 @@ describe("cloudchamber apply", () => {
 			name: "my-container-app",
 			instances: 3,
 			class_name: "DurableObjectClass",
-			image: "docker.io/beep:boop",
+			image: "registry.cloudflare.com/beep:boop",
 			configuration: {
 				labels: [
 					{
@@ -777,7 +777,7 @@ describe("cloudchamber apply", () => {
 			account_id: "1",
 			scheduling_policy: SchedulingPolicy.DEFAULT,
 			configuration: {
-				image: "docker.io/beep:boop",
+				image: "registry.cloudflare.com/beep:boop",
 				labels: [
 					{
 						name: "name",
@@ -849,7 +849,7 @@ describe("cloudchamber apply", () => {
 					class_name: "DurableObjectClass",
 					name: "my-container-app",
 					instances: 3,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					configuration: {
 						labels: [
 							{
@@ -892,7 +892,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					labels: [
 						{
 							name: "name",
@@ -959,7 +959,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -973,7 +973,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -996,7 +996,7 @@ describe("cloudchamber apply", () => {
 			│
 			├ EDIT my-container-app
 			│
-			│     image = \\"docker.io/beep:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/beep:boop\\"
 			│     instance_type = \\"dev\\"
 			│ + [containers.configuration.observability.logs]
 			│ + enabled = true
@@ -1026,7 +1026,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1040,7 +1040,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -1063,7 +1063,7 @@ describe("cloudchamber apply", () => {
 			│
 			├ EDIT my-container-app
 			│
-			│     image = \\"docker.io/beep:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/beep:boop\\"
 			│     instance_type = \\"dev\\"
 			│ + [containers.configuration.observability.logs]
 			│ + enabled = true
@@ -1093,7 +1093,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1107,7 +1107,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					observability: {
 						logs: {
 							enabled: true,
@@ -1165,7 +1165,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1179,7 +1179,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					observability: {
 						logs: {
 							enabled: true,
@@ -1236,7 +1236,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1250,7 +1250,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					observability: {
 						logs: {
 							enabled: true,
@@ -1307,7 +1307,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1321,7 +1321,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					observability: {
 						logs: {
 							enabled: true,
@@ -1382,7 +1382,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1396,7 +1396,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					observability: {
 						logs: {
 							enabled: true,
@@ -1442,7 +1442,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1456,7 +1456,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -1494,7 +1494,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					class_name: "DurableObjectClass",
 					instances: 1,
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 				},
 			],
 		});
@@ -1508,7 +1508,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					observability: {
 						logs: {
 							enabled: false,
@@ -1555,7 +1555,7 @@ describe("cloudchamber apply", () => {
 					instances: 3,
 					class_name: "DurableObjectClass",
 					instance_type: "dev",
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					constraints: {
 						tier: 2,
 					},
@@ -1581,7 +1581,7 @@ describe("cloudchamber apply", () => {
 			│     tier = 2
 			│
 			│     [containers.configuration]
-			│     image = \\"docker.io/beep:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/beep:boop\\"
 			│     instance_type = \\"dev\\"
 			│
 			│
@@ -1608,7 +1608,7 @@ describe("cloudchamber apply", () => {
 						memory_mib: 1024,
 						disk_mb: 2000,
 					},
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					constraints: {
 						tier: 2,
 					},
@@ -1634,7 +1634,7 @@ describe("cloudchamber apply", () => {
 			│     tier = 2
 			│
 			│     [containers.configuration]
-			│     image = \\"docker.io/beep:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/beep:boop\\"
 			│     vcpu = 1
 			│     memory_mib = 1_024
 			│
@@ -1661,7 +1661,7 @@ describe("cloudchamber apply", () => {
 					instances: 4,
 					class_name: "DurableObjectClass",
 					instance_type: "standard",
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					constraints: {
 						tier: 2,
 					},
@@ -1678,7 +1678,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -1707,7 +1707,7 @@ describe("cloudchamber apply", () => {
 			│   name = \\"my-container-app\\"
 			│   scheduling_policy = \\"regional\\"
 			│     [containers.configuration]
-			│     image = \\"docker.io/beep:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/beep:boop\\"
 			│ -   instance_type = \\"dev\\"
 			│ +   instance_type = \\"standard\\"
 			│     [containers.constraints]
@@ -1740,7 +1740,7 @@ describe("cloudchamber apply", () => {
 						memory_mib: 1024,
 						disk_mb: 6000,
 					},
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					constraints: {
 						tier: 2,
 					},
@@ -1757,7 +1757,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "2GB",
 						size_mb: 2000,
@@ -1786,7 +1786,7 @@ describe("cloudchamber apply", () => {
 			│   name = \\"my-container-app\\"
 			│   scheduling_policy = \\"regional\\"
 			│     [containers.configuration]
-			│     image = \\"docker.io/beep:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/beep:boop\\"
 			│     memory = \\"256MB\\"
 			│ -   memory_mib = 256
 			│ +   memory_mib = 1_024
@@ -1821,7 +1821,7 @@ describe("cloudchamber apply", () => {
 					name: "my-container-app",
 					instances: 4,
 					class_name: "DurableObjectClass",
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					constraints: {
 						tier: 2,
 					},
@@ -1838,7 +1838,7 @@ describe("cloudchamber apply", () => {
 				account_id: "1",
 				scheduling_policy: SchedulingPolicy.REGIONAL,
 				configuration: {
-					image: "docker.io/beep:boop",
+					image: "registry.cloudflare.com/beep:boop",
 					disk: {
 						size: "4GB",
 						size_mb: 4000,
@@ -1867,7 +1867,7 @@ describe("cloudchamber apply", () => {
 			│   name = \\"my-container-app\\"
 			│   scheduling_policy = \\"regional\\"
 			│     [containers.configuration]
-			│     image = \\"docker.io/beep:boop\\"
+			│     image = \\"registry.cloudflare.com/some-account-id/beep:boop\\"
 			│ -   instance_type = \\"basic\\"
 			│ +   instance_type = \\"dev\\"
 			│     [containers.constraints]
