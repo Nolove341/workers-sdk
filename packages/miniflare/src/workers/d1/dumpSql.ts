@@ -75,6 +75,10 @@ export function* dumpSql(
 			dflt_val: string | null;
 			pk: number;
 		}[];
+		if (stats) {
+			stats.rows_read += columns_cursor.rowsRead;
+			stats.rows_written += columns_cursor.rowsWritten;
+		}
 
 		const select = `SELECT ${columns.map((c) => escapeId(c.name)).join(", ")} FROM ${escapeId(table)};`;
 		const rows_cursor = db.exec(select);
@@ -107,8 +111,8 @@ export function* dumpSql(
 			yield `INSERT INTO ${escapeId(table)} VALUES(${formattedCells.join(",")});`;
 		}
 		if (stats) {
-			stats.rows_read += tables_cursor.rowsRead;
-			stats.rows_written += tables_cursor.rowsWritten;
+			stats.rows_read += rows_cursor.rowsRead;
+			stats.rows_written += rows_cursor.rowsWritten;
 		}
 	}
 
