@@ -162,14 +162,21 @@ export async function buildAndMaybePush(
 					imageTag
 				).split(":")[0];
 
+				logger.debug("respositoryOnly:", repositoryOnly);
+
 				// if this succeeds it means this image already exists remotely
 				// if it fails it means it doesn't exist remotely and should be pushed.
 				const [digest, ...rest] = parsedDigests.filter((d): d is string => {
 					const resolved = resolveImageName(account.external_account_id, d);
+					logger.debug(
+						`Comparing ${resolved.split("@")[0]} to ${repositoryOnly}`
+					);
 					return (
 						typeof d === "string" && resolved.split("@")[0] === repositoryOnly
 					);
 				});
+
+				logger.debug("digest", digest);
 				if (rest.length > 0) {
 					throw new Error(
 						`Expected there to only be 1 valid digests for this repository: ${repositoryOnly} but there were ${rest.length + 1}`
@@ -196,7 +203,7 @@ export async function buildAndMaybePush(
 					"manifest",
 					"inspect",
 					"-v",
-					remoteDigest,
+					`${resolveImageName(account.external_account_id, remoteDigest)}`,
 				]);
 				logger.debug(
 					`'docker manifest inspect -v ${remoteDigest}:`,
